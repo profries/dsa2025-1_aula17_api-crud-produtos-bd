@@ -15,29 +15,29 @@ async function inserir (req, res) {
     }
 }
 
-function buscarPorId(req, res) {    
+async function buscarPorId(req, res) {    
     const id = +req.params.id;
     try {
-        res.json(produtoService.buscarPorId(id));
+        res.json(await produtoService.buscarPorId(id));
     } catch(err) {
         res.status(err.id).json(err);
     }
 }
 
-function atualizar(req, res) {
+async function atualizar(req, res) {
     const id = +req.params.id;
     let produto = req.body;
     try{
-        res.json(produtoService.atualizar(id, produto));
+        res.json(await produtoService.atualizar(id, produto));
     } catch(err) {
         res.status(err.id).json(err);
     }
 }
 
-function deletar(req, res) {
+async function deletar(req, res) {
     const id = +req.params.id;
     try {
-        res.json(produtoService.deletar(id));
+        res.json(await produtoService.deletar(id));
     } catch(err) {
         res.status(err.id).json(err);
     }
