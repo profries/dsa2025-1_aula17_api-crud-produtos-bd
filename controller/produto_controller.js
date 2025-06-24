@@ -4,10 +4,10 @@ async function listar(req, res) {
     res.json(await produtoService.listar());
 }
 
-function inserir (req, res) {
+async function inserir (req, res) {
     let produto = req.body;
     try { 
-        produtoService.inserir(produto);
+        await produtoService.inserir(produto);
         res.status(201).json(produto);
     }
     catch(err) {

@@ -23,6 +23,21 @@ async function listar() {
     return listaProdutos;
 }
 
+async function inserir(produto) {
+    const cliente = new Client(confCliente);
+    await cliente.connect();
+    
+    const sql = "INSERT INTO produtos(nome, categoria, preco) VALUES ($1, $2, $3) RETURNING *";
+    const res = await cliente.query(sql, [produto.nome, produto.categoria, produto.preco]);
+
+    await cliente.end();
+
+    const produtoInserido = res.rows[0];
+    return produtoInserido;
+
+}
+
 module.exports = {
-    listar
+    listar,
+    inserir
 }
